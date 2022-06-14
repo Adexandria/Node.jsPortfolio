@@ -4,8 +4,6 @@ const host = 'localhost';
 const port = 3000;
 
 const server = http.createServer(function (req, res) {
-    res.statusCode = 200;
-	res.setHeader('Content-Type', 'text/html');
 
 	const routeMap = {
 		'home.html': 'pages/home.html',
@@ -21,10 +19,10 @@ server.listen(port,host,()=>{
 });
 
 function render(res, htmlFile) {
-    fs.stat(`./${htmlFile}`, (err, stats) => {
-      res.statusCode = 200;
+    fs.stat(`./${htmlFile}`, (err, stats) => {    
       res.setHeader('Content-Type', 'text/html');
         if(stats) {
+            res.statusCode = 200;
             fs.createReadStream(htmlFile).pipe(res);
         } else {
             res.statusCode = 404;
